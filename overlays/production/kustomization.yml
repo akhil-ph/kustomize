@@ -1,0 +1,29 @@
+namespace: prod-devops
+nameSuffix: -prod
+commonLabels:
+  env: prod-env
+bases:
+  - ../../base
+patches:
+  - path: ingress.yml
+    target:
+      group: networking.k8s.io
+      version: v1
+      kind: Ingress
+      name: devops-toolkit-ing
+  - path: replica.yml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: devops-toolkit-deploy
+  - path: resources.yml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: devops-toolkit-deploy
+images:
+  - name: vfarcic/devops-toolkit-series
+    newName: vfarcic/devops-toolkit-series
+    newTag: 3.0.0

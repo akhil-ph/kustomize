@@ -1,0 +1,18 @@
+namespace: dev-devops
+nameSuffix: -dev
+commonLabels:
+  env: dev-env
+bases:
+  - ../../base
+patches:
+  - path: ingress.yml
+    target:
+      group: networking.k8s.io
+      version: v1
+      kind: Ingress
+      name: devops-toolkit-ing
+
+images:
+  - name: vfarcic/devops-toolkit-series
+    newName: vfarcic/devops-toolkit-series
+    newTag: 3.0.0
